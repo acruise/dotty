@@ -126,8 +126,8 @@ object DottyBuild extends Build {
         // Magic! This is both an input task and a dynamic task. Apparently
         // command line arguments get passed to the last task in an aliased
         // sequence (see partest alias below), so this works.
-        var args = Def.spaceDelimited("<arg>").parsed // var is OK as a local IMO, it makes the following cleaner
-        if (!args.contains("--verbose")   && !args.contains("--quiet"))   args :+= "--verbose"    // note --quiet is invented here, just to suppress the new default
+        var args = Def.spaceDelimited("<arg>").parsed
+        if (!args.contains("--verbose")   && !args.contains("--terse"))   args :+= "--verbose"    // Add --verbose by default unless already present or suppressed 
         if (!args.contains("--show-diff") && !args.contains("--no-diff")) args :+= "--show-diff"  // note --no-diff is invented here, just to suppress the new default
 
         val jars = Seq((packageBin in Compile).value.getAbsolutePath) ++
